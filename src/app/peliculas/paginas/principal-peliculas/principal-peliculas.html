@@ -1,0 +1,16 @@
+<h2>Listado de películas</h2>
+<label for="titulo">Título Película</label>
+<input type="text" #titulo id="titulo" [(ngModel)]="tituloPelicula">
+<br/>
+<label for="veces">Número veces</label>
+<input type="number" #veces id="veces" [(ngModel)]="numeroVeces">
+<br/>
+<button (click)="anadirPelicula(titulo.value, veces.value) ">Añadir</button>
+<hr>
+<p>Total películas {{totalPeliculas()}}</p>
+<ul>
+        @for(pelicula of misPeliculas(); track pelicula.titulo){
+                <li>Título: {{pelicula.titulo}} - Veces: {{pelicula.veces}}
+                </li>
+        }
+</ul>
