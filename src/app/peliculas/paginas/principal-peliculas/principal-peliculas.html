@@ -1,7 +1,9 @@
 <h2>Listado de películas</h2>
 <label for="titulo">Título Película</label>
 <input type="text" #titulo id="titulo" [(ngModel)]="tituloPelicula">
-<br/>
+<button (click)="buscarPelicula(titulo.value) ">Buscar</button>
+
+<!--<br/>
 <label for="veces">Número veces</label>
 <input type="number" #veces id="veces" [(ngModel)]="numeroVeces">
 <br/>
@@ -13,4 +15,41 @@
                 <li>Título: {{pelicula.titulo}} - Veces: {{pelicula.veces}}
                 </li>
         }
-</ul>
+</ul>-->
+@if (resultado(); as data) {
+
+  @if (data.Response === 'True') {
+    
+    <div class="movie">
+        <div class="fichaGeneral">
+                <img [src]="data.Poster" alt="Póster de {{ data.Title }}">
+                <div class="datos">
+                        <h2>{{ data.Title }} ({{ data.Year }})</h2>
+                        <p><strong>Director:</strong> {{ data.Director }}</p>
+                        <p><strong>Actors:</strong>{{ data.Actors}}</p>
+                        <p><strong>Genre:</strong>{{ data.Genre}}</p>
+                        <p><strong>Valoraciones:</strong></p>
+                        @for(rating of data.Ratings; track rating.Source){
+                                <p>{{rating.Source}}: {{rating.Value}} </p>
+                        } @empty {
+                                <p>No hay valoraciones</p>
+                        }
+                        <button (click)="toggleFavorito(data)">Favorito</button>
+                </div>
+        </div>
+
+      <p>{{ data.Plot }}</p>
+    </div>
+
+  } @else {
+    
+    <div class="error-msg">
+      <p>⚠️ {{ data.Error }}</p>
+    </div>
+    
+  }
+
+} @else {
+  <p>Realiza una búsqueda para ver resultados.</p>
+}
+

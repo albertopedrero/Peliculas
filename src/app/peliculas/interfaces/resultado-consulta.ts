@@ -1,8 +1,3 @@
-/*export interface Pelicula{
-    titulo:string;
-    veces: number;
-}*/
-
 export interface Rating {
   Source: string;
   Value: string;

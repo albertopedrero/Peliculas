@@ -1,0 +1,8 @@
+.fichaGeneral{
+    display: flex;
+}
+
+.fichaGeneral img {
+    width: 220px;
+    padding: 1rem;
+}
